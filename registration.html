@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Recados - Cadastro</title>
+    <link rel="icon" type="image/png" href="assets/images/task.svg" />
+    <link rel="stylesheet" type="text/css" href="assets/style.css" />
+    <script
+      src="https://kit.fontawesome.com/d953ddf065.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="page">
+      <div class="container">
+        <div class="img-login">
+          <img
+            class="login-img"
+            src="/assets/images/task1.jpg"
+            alt="computador-tablet-smartphone"
+          />
+        </div>
+        <form class="form" id="form-cadastro">
+          <h1 class="title-login">Cadastro</h1>
+          <div id="msg-error-regist"></div>
+          <div class="div-input">
+            <label for="input-cad-email" id="cad-username">Digite seu e-mail</label>
+            <input class="input" id="input-cad-email" name="input-cad-email" type="email" placeholder="seuemail@exemplo.com" value="" required
+            />
+          </div>
+          <div class="div-input">
+            <label for="input-cad-password" id="cad-password">Digite sua senha</label>
+            <i class="fa-solid fa-eye" id="i-eye"></i>
+            <input class="input" id="input-cad-password" name="input-cad-password" type="password" placeholder="senha" value="" required/>
+          </div>
+          <div class="div-input">
+            <label for="input-confirm" id="label-confirm">Repita sua senha</label>
+            <i class="fa-solid fa-eye" id="i-eye2"></i>
+            <input class="input" id="input-confirm" name="input-confirm" type="password" placeholder="repita a senha" value="" required/>
+          </div>
+          <input type="submit" class="button" id="button-cad-login" value="Cadastre-se"></input>
+        </form>
+      </div>
+    </div>
+    <script src="/assets/js/registration.js"></script>
+  </body>
+</html>

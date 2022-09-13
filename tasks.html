@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Recados</title>
+    <link rel="icon" type="image/png" href="assets/images/task.svg" />
+    <link rel="stylesheet" type="text/css" href="assets/style.css" />
+    <script
+      src="https://kit.fontawesome.com/d953ddf065.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="page">
+      <div class="container-tasks">
+        <h1 class="title-task">Meus recados</h1>
+        <table id="table-task">
+          <thead>
+            <th>#</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th></th>
+          </thead>
+          <tbody id="tbody-task"></tbody>
+        </table>
+
+        <form id="form-tasks">
+          <div class="div-task">
+            <input
+              id="input-title"
+              name="input-title"
+              type="text"
+              placeholder="Nome da tarefa"
+              value=""
+            />
+            <textarea
+              id="input-description"
+              cols="50"
+              rows="3"
+              placeholder="Descrição"
+              value=""
+            ></textarea>
+          </div>
+
+          <button type="submit" id="button-add-task" value="Adicionar Tarefa">
+            <i class="fa-regular fa-plus"></i>Adicionar Tarefa
+          </button>
+        </form>
+      </div>
+    </div>
+    <script src="/assets/js/tasks.js"></script>
+  </body>
+</html>

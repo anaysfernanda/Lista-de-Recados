@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Recados - Login</title>
+    <link rel="icon" type="image/png" href="assets/images/task.svg" />
+    <link rel="stylesheet" type="text/css" href="assets/style.css" />
+    <script
+      src="https://kit.fontawesome.com/d953ddf065.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="page">
+      <div class="container">
+        <div class="img-login">
+          <img
+            class="login-img"
+            src="/assets/images/task1.jpg"
+            alt="computador-tablet-smartphone"
+          />
+        </div>
+        <form class="form" id="form-login">
+          <h1 class="title-login">Iniciar Sessão</h1>
+          <div id="msg-error-login"></div>
+          <div class="div-input">
+            <label for="input-email" id="username">Digite seu e-mail</label>
+            <input class="input" id="input-email" name="input-email" type="email" placeholder="seuemail@exemplo.com" value="" required
+            />
+          </div>
+          <div class="div-input">
+            <label for="input-password" id="password">Digite sua senha</label>
+            <i class="fa-solid fa-eye" id="i-eye"></i>
+            <input class="input" id="input-password" name="input-password" type="password" placeholder="senha" value="" required/>
+          </div>
+          <input type="submit" class="button" id="button-login" value="login"></input>
+          <a id="create-account" href="registration.html"
+            >Ainda não tem conta? Cadastre-se aqui!</a
+          >
+        </form>
+      </div>
+    </div>
+    <script src="/assets/js/login.js"></script>
+  </body>
+</html>
