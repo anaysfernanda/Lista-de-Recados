@@ -1,12 +1,17 @@
-let listTask = JSON.parse(localStorage.getItem("task")) || [];
+let listTask = JSON.parse(localStorage.getItem("tasks")) || [];
 let formTask = document.getElementById("form-tasks");
 const inputTitle = document.getElementById("input-title");
 const inputDescription = document.getElementById("input-description");
 const list = document.getElementById("tbody-task");
 
-formTask.addEventListener("submit", addTask);
-window.addEventListener("load", showTaskList);
+// [{user: 'ana@ana.com', tasks: [{"title":"Testando","description":"Teste 123..."},{"title":"Teste 123","description":"Testando"}]}]
 
+// let userTaskList = listTask.find((value) => {
+//     value.user = 'ana@ana.com'
+// })
+
+// Aparecer as tarefas adicionadas anteriormente
+window.addEventListener("load", showTaskList);
 function showTaskList() {
   list.innerHTML = "";
   const taskTable = generateTaskList(listTask);
@@ -15,6 +20,8 @@ function showTaskList() {
   });
 }
 
+// Adicionar tarefas
+formTask.addEventListener("submit", addTask);
 function addTask(e) {
   e.preventDefault();
 
@@ -24,7 +31,7 @@ function addTask(e) {
   };
 
   listTask.push(newTask);
-  localStorage.setItem("task", JSON.stringify(listTask));
+  localStorage.setItem("tasks", JSON.stringify(listTask));
   console.log(typeof listTask);
   console.log(listTask);
 
@@ -34,6 +41,7 @@ function addTask(e) {
   inputDescription.value = "";
 }
 
+// Criar linha da tabela
 function generateTaskList(newListTask) {
   console.log(newListTask);
   return newListTask.map((element, index) => {

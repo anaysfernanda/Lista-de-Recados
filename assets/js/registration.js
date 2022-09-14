@@ -42,7 +42,7 @@ function submitFormUser(e) {
     userListArray.push(login);
     localStorage.setItem("users", JSON.stringify(userListArray));
 
-    // localStorage.setItem(login.email.value, JSON.stringify(userListArray));
+    // localStorage.setItem(login.email, JSON.stringify(userListArray));
 
     window.location.href = "./login.html";
   } else {

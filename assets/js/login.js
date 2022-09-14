@@ -17,7 +17,7 @@ icon.addEventListener("click", () => {
 formLogin.addEventListener("submit", doLogin);
 function doLogin(e) {
   e.preventDefault();
-  let accountList = JSON.parse(localStorage.getItem("users"));
+  let accountList = JSON.parse(localStorage.getItem("users")) || [];
 
   const validation = {
     emailLogin: "",
@@ -43,5 +43,8 @@ function doLogin(e) {
   } else {
     msgError.setAttribute("style", "display: block");
     msgError.innerHTML = "<p>Usuário e/ou senha incorretos.</p>";
+    userEmail.value = "";
+    userPassword.value = "";
+    userEmail.focus();
   }
 }
