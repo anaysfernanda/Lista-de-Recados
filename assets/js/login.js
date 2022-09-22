@@ -42,7 +42,8 @@ function doLogin(e) {
     window.location.href = "./tasks.html";
   } else {
     msgError.setAttribute("style", "display: block");
-    msgError.innerHTML = "<p>Usuário e/ou senha incorretos.</p>";
+    msgError.innerHTML =
+      "<p style='text-align:center;'>Usuário e/ou senha incorretos.</br>Você ainda não tem cadastro? CaSdastre-se abaixo.</p>";
     userEmail.value = "";
     userPassword.value = "";
     userEmail.focus();
