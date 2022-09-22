@@ -226,7 +226,7 @@ td:last-child {
   width: 100px;
 }
 
-.btnRemove {
+#btnRemove {
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
@@ -238,7 +238,7 @@ td:last-child {
   margin: 3px;
 }
 
-.btnEdit {
+#btnEdit {
   padding: 5px 7px;
   border-radius: 5px;
   cursor: pointer;

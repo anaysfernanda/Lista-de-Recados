@@ -30,12 +30,9 @@ function addTask(e) {
     title: inputTitle.value,
     description: inputDescription.value,
   };
-  console.log(`Id da task ${newId.id}`);
 
   listTask.push(newTask);
   localStorage.setItem("tasks", JSON.stringify(listTask));
-  console.log(typeof listTask);
-  console.log(listTask);
 
   showTaskList();
 
@@ -48,7 +45,7 @@ function generateTaskList(newListTask) {
   console.log(newListTask);
   return newListTask.map((element, index) => {
     const rows = document.getElementsByClassName("task-rows");
-    const id = index + 1;
+    const id = element.id;
 
     const elementRow = document.createElement("tr");
     elementRow.classList = ["task-rows"];
@@ -59,11 +56,13 @@ function generateTaskList(newListTask) {
     elementRow.appendChild(elementID);
 
     const elementTitle = document.createElement("td");
-    elementTitle.innerText = element.title;
+    // elementTitle.innerText = element.title;
+    elementTitle.innerHTML = `<input type='text' id='titleEdit${id}' value='${element.title}' disabled>`;
     elementRow.appendChild(elementTitle);
 
     const elementDescription = document.createElement("td");
     elementDescription.innerText = element.description;
+    elementDescription.innerHTML = `<input type='text' id='descriptionEdit${id}' value='${element.description}' disabled>`;
     elementRow.appendChild(elementDescription);
 
     const actions = document.createElement("td");
@@ -72,12 +71,12 @@ function generateTaskList(newListTask) {
     const buttonEdit = document.createElement("button");
     // buttonEdit.classList = ["btnEdit"];
     // buttonEdit.innerText = "Editar";
-    buttonEdit.innerHTML = `<button class='btnEdit' onclick='editTask(${id})'>Editar</button>`;
+    buttonEdit.innerHTML = `<button id='btnEdit' onclick='editTask(${id})'>Editar</button>`;
 
     const buttonRemove = document.createElement("button");
     // buttonRemove.classList = ["btnRemove"];
     // buttonRemove.innerText = "Excluir";
-    buttonRemove.innerHTML = `<button class='btnRemove' onclick='removeTask(${id})'>Excluir</button>`;
+    buttonRemove.innerHTML = `<button id='btnRemove' onclick='removeTask(${id})'>Excluir</button>`;
 
     actions.appendChild(buttonEdit);
     actions.appendChild(buttonRemove);
@@ -88,6 +87,7 @@ function generateTaskList(newListTask) {
 }
 
 function removeTask(id) {
+  console.log(`Id da task ${id}`);
   const listIndex = listTask.findIndex((task) => task.id === id);
 
   if (listIndex < 0) {
@@ -116,8 +116,19 @@ function newId(taskList) {
 
 function editTask(id) {
   const listIndex = listTask.findIndex((task) => task.id === id);
+  console.log(listIndex);
+  const titleEdit = document.getElementById(`titleEdit${id}`);
+  const descriptionEdit = document.getElementById(`descriptionEdit${id}`);
 
   if (listIndex >= 0) {
-    localStorage.setItem("tasks", JSON.stringify(listTask));
+    alert("selecionou!");
+    titleEdit.removeAttribute("disabled");
+    descriptionEdit.removeAttribute("disabled");
+    titleEdit.addEventListener("blur", (e) => {
+      e.target.setAttribute("disabled", false);
+    });
+    descriptionEdit.addEventListener("blur", (e) => {
+      e.target.setAttribute("disabled", false);
+    });
   }
 }
