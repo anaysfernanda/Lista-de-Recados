@@ -1,19 +1,15 @@
-let listTask = JSON.parse(localStorage.getItem("tasks")) || [];
+let loggedInUser = localStorage.getItem("logged");
+let listTask = JSON.parse(localStorage.getItem(loggedInUser)) || [];
 let formTask = document.getElementById("form-tasks");
 const inputTitle = document.getElementById("input-title");
 const inputDescription = document.getElementById("input-description");
 const list = document.getElementById("tbody-task");
-
-// [{user: 'ana@ana.com', tasks: [{"title":"Testando","description":"Teste 123..."},{"title":"Teste 123","description":"Testando"}]}]
-
-// let userTaskList = listTask.find((value) => {
-//     value.user = 'ana@ana.com'
-// })
+const msgError = document.getElementById("msg-error-task");
 
 // Aparecer as tarefas adicionadas anteriormente
 window.addEventListener("load", showTaskList);
 function showTaskList() {
-  list.innerHTML = "";
+  list.innerHTML = ""; //Parar de duplicar tarefas;
   const taskTable = generateTaskList(listTask);
   taskTable.forEach((elem) => {
     list.appendChild(elem);
@@ -24,31 +20,37 @@ function showTaskList() {
 formTask.addEventListener("submit", addTask);
 function addTask(e) {
   e.preventDefault();
+  //Validação dos campos de input
+  if (inputTitle.value == "" || inputDescription.value == "") {
+    msgError.setAttribute("style", "display: block");
+    msgError.innerHTML =
+      "<p>Adicione o nome da tarefa e/ou a descrição da tarefa.</p>";
+  } else {
+    msgError.setAttribute("style", "display: none");
 
-  const newTask = {
-    id: newId(listTask),
-    title: inputTitle.value,
-    description: inputDescription.value,
-  };
+    // Objeto da tarefa
+    const newTask = {
+      id: newId(listTask),
+      title: inputTitle.value,
+      description: inputDescription.value,
+    };
+    // Inclusão do objeto no array de tarefas
+    listTask.push(newTask);
+    localStorage.setItem(loggedInUser, JSON.stringify(listTask));
 
-  listTask.push(newTask);
-  localStorage.setItem("tasks", JSON.stringify(listTask));
+    showTaskList();
 
-  showTaskList();
-
-  inputTitle.value = "";
-  inputDescription.value = "";
+    inputTitle.value = "";
+    inputDescription.value = "";
+  }
 }
 
 // Criar linha da tabela
 function generateTaskList(newListTask) {
-  console.log(newListTask);
-  return newListTask.map((element, index) => {
-    const rows = document.getElementsByClassName("task-rows");
+  return newListTask.map((element) => {
     const id = element.id;
 
     const elementRow = document.createElement("tr");
-    elementRow.classList = ["task-rows"];
     elementRow.id = id;
 
     const elementID = document.createElement("td");
@@ -56,38 +58,27 @@ function generateTaskList(newListTask) {
     elementRow.appendChild(elementID);
 
     const elementTitle = document.createElement("td");
-    // elementTitle.innerText = element.title;
-    elementTitle.innerHTML = `<input type='text' id='titleEdit${id}' value='${element.title}' disabled>`;
+    elementTitle.innerHTML = `<input type='text' class ='iptTask' id='titleEdit${id}' value='${element.title}' disabled>`;
     elementRow.appendChild(elementTitle);
 
     const elementDescription = document.createElement("td");
-    elementDescription.innerText = element.description;
-    elementDescription.innerHTML = `<input type='text' id='descriptionEdit${id}' value='${element.description}' disabled>`;
+    elementDescription.innerHTML = `<input type='text' class ='iptTask' id='descriptionEdit${id}' value='${element.description}' disabled>`;
     elementRow.appendChild(elementDescription);
 
     const actions = document.createElement("td");
     actions.id = "actions";
+    actions.innerHTML =
+      `<button id='btnEdit' class ='iptTask' onclick='editTask(${id})'>Editar</button>` +
+      `<button id='btnRemove' class ='iptTask' onclick='removeTask(${id})'>Excluir</button>`;
 
-    const buttonEdit = document.createElement("button");
-    // buttonEdit.classList = ["btnEdit"];
-    // buttonEdit.innerText = "Editar";
-    buttonEdit.innerHTML = `<button id='btnEdit' onclick='editTask(${id})'>Editar</button>`;
-
-    const buttonRemove = document.createElement("button");
-    // buttonRemove.classList = ["btnRemove"];
-    // buttonRemove.innerText = "Excluir";
-    buttonRemove.innerHTML = `<button id='btnRemove' onclick='removeTask(${id})'>Excluir</button>`;
-
-    actions.appendChild(buttonEdit);
-    actions.appendChild(buttonRemove);
     elementRow.appendChild(actions);
 
     return elementRow;
   });
 }
 
+//função para remover a tarefa;
 function removeTask(id) {
-  console.log(`Id da task ${id}`);
   const listIndex = listTask.findIndex((task) => task.id === id);
 
   if (listIndex < 0) {
@@ -95,13 +86,14 @@ function removeTask(id) {
   }
   listTask.splice(listIndex, 1);
 
-  localStorage.setItem("tasks", JSON.stringify(listTask));
+  localStorage.setItem(loggedInUser, JSON.stringify(listTask));
 
-  alert("Produto removido com sucesso!");
+  alert("Tarefa removida com sucesso!");
 
   showTaskList();
 }
 
+//função para gerar um id para a tarefa;
 function newId(taskList) {
   let nextId = taskList.length + 1;
 
@@ -114,21 +106,49 @@ function newId(taskList) {
   return nextId;
 }
 
+//função pra editar a tarefa;
 function editTask(id) {
   const listIndex = listTask.findIndex((task) => task.id === id);
-  console.log(listIndex);
   const titleEdit = document.getElementById(`titleEdit${id}`);
   const descriptionEdit = document.getElementById(`descriptionEdit${id}`);
+  const selectRow = document.getElementById(`${id}`);
 
   if (listIndex >= 0) {
-    alert("selecionou!");
     titleEdit.removeAttribute("disabled");
     descriptionEdit.removeAttribute("disabled");
     titleEdit.addEventListener("blur", (e) => {
-      e.target.setAttribute("disabled", false);
+      executTest(e, id);
     });
     descriptionEdit.addEventListener("blur", (e) => {
-      e.target.setAttribute("disabled", false);
+      executTest(e, id);
     });
+  }
+}
+
+//função pra executar o algoritmo para cada evento de "blur";
+function executTest(e, id = null) {
+  const titleEdit = document.getElementById(`titleEdit${id}`);
+  const descriptionEdit = document.getElementById(`descriptionEdit${id}`);
+  e.target.setAttribute("disabled", false);
+  const newListTask = listTask.map((task) => {
+    if (task.id === id) {
+      task.title = titleEdit.value;
+      task.description = descriptionEdit.value;
+      return task;
+    } else {
+      return task;
+    }
+  });
+
+  localStorage.setItem(loggedInUser, JSON.stringify(newListTask));
+}
+
+// Função para sair da página de tarefas;
+function logout() {
+  const confirmed = confirm("Deseja sair?");
+  if (confirmed) {
+    window.location.href = "./login.html";
+  } else {
+    window.location.href = "./tasks.html";
   }
 }

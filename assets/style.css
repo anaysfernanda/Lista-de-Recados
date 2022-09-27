@@ -167,10 +167,10 @@ img {
   cursor: pointer;
   font-family: Montserrat, sans-serif;
 }
-i {
+
+.fa-regular {
   position: relative;
   right: 12px;
-  color: #090268;
 }
 
 #table-task {
@@ -188,31 +188,23 @@ th {
 
 td {
   font-size: 13px;
-  padding: 3px;
 }
+
 td:last-child {
   text-align: right;
   width: 110px;
 }
 
-#i-eye {
-  position: relative;
-  line-height: 0;
-  left: 90%;
-  cursor: pointer;
-  color: #353535;
-}
-
+#i-eye,
 #i-eye2 {
-  position: relative;
-  line-height: 0;
-  left: 90%;
+  margin-left: 90%;
   cursor: pointer;
   color: #353535;
 }
 
 #msg-error-regist,
-#msg-error-login {
+#msg-error-login,
+#msg-error-task {
   font-size: 13px;
   color: #ff0000;
   padding: 10px;
@@ -220,6 +212,7 @@ td:last-child {
   border-radius: 5px;
   margin-bottom: 10px;
   display: none;
+  text-align: center;
 }
 
 #logout {
@@ -232,7 +225,7 @@ td:last-child {
   cursor: pointer;
   border: none;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  background-color: #ff0000;
+  background-color: #f15b5b;
   color: #fff;
   font-family: Montserrat, sans-serif;
   margin: 3px;
@@ -244,7 +237,7 @@ td:last-child {
   cursor: pointer;
   border: none;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  background-color: #236318;
+  background-color: #589b4c;
   color: #fff;
   font-family: Montserrat, sans-serif;
   margin: 3px;
@@ -252,4 +245,29 @@ td:last-child {
 
 #actions {
   width: 150px;
+}
+
+#btnLogout {
+  margin-top: 200px;
+  padding: 8px 30px;
+  border-radius: 50px;
+  border: none;
+  background-color: #22a07a;
+  color: white;
+  font-size: 15px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.iptTask {
+  border: none;
+  color: #353535;
+  font-family: Montserrat, sans-serif;
+  padding: 4px;
+}
+
+#username,
+#usernameCad {
+  margin-bottom: 15px;
 }

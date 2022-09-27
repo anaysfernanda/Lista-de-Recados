@@ -34,16 +34,16 @@ function doLogin(e) {
     }
   }
 
-  console.log(validation);
   if (
     userEmail.value === validation.emailLogin &&
     userPassword.value === validation.passwordLogin
   ) {
+    localStorage.setItem("logged", userEmail.value);
     window.location.href = "./tasks.html";
   } else {
     msgError.setAttribute("style", "display: block");
     msgError.innerHTML =
-      "<p style='text-align:center;'>Usuário e/ou senha incorretos.</br>Você ainda não tem cadastro? CaSdastre-se abaixo.</p>";
+      "<p style='text-align:center;'>Usuário e/ou senha incorretos.</br>Você ainda não tem cadastro? Cadastre-se abaixo.</p>";
     userEmail.value = "";
     userPassword.value = "";
     userEmail.focus();

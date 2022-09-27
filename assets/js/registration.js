@@ -4,8 +4,8 @@ console.log(userListArray);
 const formCadastro = document.getElementById("form-cadastro");
 const inputEmail = document.getElementById("input-cad-email");
 const inputPassword = document.getElementById("input-cad-password");
-let validPassword = false;
 const inputConfirm = document.getElementById("input-confirm");
+let validPassword = false;
 let validConfirm = false;
 const icon1 = document.querySelector("#i-eye");
 const icon2 = document.querySelector("#i-eye2");
@@ -38,6 +38,8 @@ function submitFormUser(e) {
       password: inputPassword.value,
       passwordConfirm: inputConfirm.value,
     };
+
+    if (!isEmailValid(login.email)) return;
 
     userListArray.push(login);
     localStorage.setItem("users", JSON.stringify(userListArray));
@@ -74,3 +76,15 @@ inputConfirm.addEventListener("keyup", () => {
     validConfirm = true;
   }
 });
+
+// Validação se e-mail já existe;
+function isEmailValid(email) {
+  if (userListArray.some((user) => email === user.email)) {
+    msgError.setAttribute("style", "display: block");
+    msgError.innerHTML =
+      "<p class='textLogin'>E-mail já cadastrado. </br><a href='./login.html'>Clique aqui e faça o login</a> ou cadastre novo e-mail</p>";
+    inputEmail.focus();
+    return false;
+  }
+  return true;
+}
