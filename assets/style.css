@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cutive&display=swap");
 
 * {
   margin: 0px;
@@ -7,155 +8,124 @@
 }
 
 body {
-  font-family: Montserrat, sans-serif;
+  font-family: Poppins, sans-serif !important;
+  background: linear-gradient(
+    -135deg,
+    rgba(65, 196, 189, 1) 0%,
+    rgba(9, 2, 104, 1) 65%
+  );
+  overflow: scroll;
+  height: 100%;
 }
 
-.page {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background: linear-gradient(-135deg, #41c4bd, #090268);
+.login-img {
+  width: 200px;
 }
 
-.container {
-  width: 960px;
-  min-height: 95vh;
-  border-radius: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  overflow-wrap: break-word;
+.backPage {
   background-color: #f5f5f5;
-  padding: 10px;
+  width: 90%;
 }
 
-img {
-  width: 300px;
+.backHeight {
+  height: 100%;
 }
 
-.title-login {
-  font-weight: 800;
-  color: #353535;
-  font-size: 26px;
-  padding-bottom: 25px;
+h1,
+h3 {
+  color: #3f3f3f;
+  font-family: Cutive, monospace;
 }
 
-.div-input {
-  display: flex;
-  flex-direction: column;
-  background-color: #e2e2e2;
-  border-radius: 15px;
-  width: 100%;
-  padding: 12px;
-  font-size: 15px;
-  margin: 7px;
+.title {
+  border-right: 2px solid #3f3f3f;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 30px;
 }
 
-.input {
-  font-family: Montserrat, sans-serif;
-  border: none;
-  font-size: 13px;
-  background-color: #e2e2e2;
-  padding-top: 5px;
-  outline: 0;
+.typing-animation {
+  animation: blinkCursor 0.5s steps(32) infinite normal,
+    typing 4s steps(32) 1s normal both;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.text {
+  font-size: 17px;
 }
 
 .button {
-  cursor: pointer;
-  font-family: Montserrat, sans-serif;
-  font-size: 15px;
-  color: #fff;
-  text-transform: uppercase;
-  width: 100%;
-  height: 50px;
-  border-radius: 15px;
-  background: #57b846;
-  margin-top: 13px;
-  border: none;
-  font-weight: 600;
+  background: linear-gradient(-90deg, #9bcca6, #01a80a);
+  color: white !important;
+  box-shadow: 0 3px 5px rgb(0 0 0 / 0.4);
 }
 
-#create-account {
-  margin: 13px 40px;
-  font-size: 12px;
-  color: #353535;
-  text-decoration: none;
+.button:hover {
+  background: linear-gradient(-90deg, #85ac8d, #019708);
 }
 
-#create-account:hover {
-  text-decoration: underline;
-  color: #318d21;
+.btn-account {
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
-#input-confirm {
-  margin: 0 122.4px 0 0;
+a {
+  color: #3f3f3f !important;
 }
 
-.container-tasks {
-  width: 960px;
-  min-height: 95vh;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  background-color: #f5f5f5;
-  padding: 60px 80px;
+a:hover {
+  color: #01a80a !important;
 }
 
-.form-tasks {
-  display: flex;
-  flex-direction: column;
+#arrow,
+#arrow2 {
+  color: white;
+  position: relative;
+  bottom: 26px;
+  left: 40px;
 }
 
-.title-task {
-  font-weight: 800;
-  color: #353535;
-  font-size: 22px;
-  padding-bottom: 20px;
+#arrow2 {
+  left: 59px;
+  bottom: 51px;
+}
+
+#i-eye,
+#i-eye2 {
+  position: absolute;
+  bottom: 21px;
+  left: 90%;
+}
+
+#msg-error-regist {
+  font-size: 13px;
+  color: #ff0000;
+  background-color: #fdcfcf;
+  display: none;
 }
 
 #input-title,
 #input-description {
-  width: 100%;
-  border: none;
-  margin-right: 100px;
   outline: 0;
-  padding-left: 5px;
 }
 
 #input-description {
   resize: none;
-  padding-top: 6px;
 }
 
 #input-title::placeholder {
   font-size: 15px;
   font-weight: 600;
-  font-family: Montserrat, sans-serif;
+  font-family: Poppins, sans-serif;
 }
 
 #input-description::placeholder {
   font-size: 12px;
   font-weight: 400;
-  font-family: Montserrat, sans-serif;
+  font-family: Poppins, sans-serif;
 }
 
 .div-task {
-  border: 1px solid #979797;
   background-color: #fff;
-  border-radius: 5px;
-  padding: 5px;
 }
 
 #button-add-task {
@@ -165,7 +135,7 @@ img {
   background-color: #f5f5f5;
   color: #353535;
   cursor: pointer;
-  font-family: Montserrat, sans-serif;
+  font-family: Poppins, sans-serif;
 }
 
 .fa-regular {
@@ -173,101 +143,79 @@ img {
   right: 12px;
 }
 
-#table-task {
-  border-bottom: 1px solid #979797;
-  width: 95%;
-  margin-bottom: 20px;
-  color: #757575;
-  text-align: left;
+@media screen and (max-width: 700px) {
+  .login-img {
+    margin-top: 10px;
+    max-width: 100px;
+  }
+  .btn-account {
+    margin-left: 46px;
+    margin-right: 46px;
+  }
 }
 
-th {
-  font-size: 15px;
-  padding: 3px;
+@media screen and (max-width: 576px) {
+  .login-img {
+    display: none;
+  }
 }
 
-td {
-  font-size: 13px;
+.alert-danger {
+  font-size: 12px;
 }
 
-td:last-child {
-  text-align: right;
-  width: 110px;
+.font-size {
+  font-size: 14px !important;
 }
 
-#i-eye,
-#i-eye2 {
-  margin-left: 90%;
-  cursor: pointer;
-  color: #353535;
+@media screen and (max-width: 940px) {
+  .title {
+    font-size: 18px !important;
+  }
 }
 
-#msg-error-regist,
-#msg-error-login,
-#msg-error-task {
-  font-size: 13px;
-  color: #ff0000;
-  padding: 10px;
-  background-color: #fdcfcf;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  display: none;
-  text-align: center;
+@keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
 }
 
-#logout {
-  width: 100px;
+@keyframes arrow {
+  0% {
+    left: 40px;
+  }
+  100% {
+    left: 53px;
+  }
 }
 
-#btnRemove {
-  padding: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  background-color: #f15b5b;
-  color: #fff;
-  font-family: Montserrat, sans-serif;
-  margin: 3px;
+@keyframes arrow2 {
+  0% {
+    left: 59px;
+  }
+  100% {
+    left: 70px;
+  }
 }
 
-#btnEdit {
-  padding: 5px 7px;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  background-color: #589b4c;
-  color: #fff;
-  font-family: Montserrat, sans-serif;
-  margin: 3px;
+@keyframes blinkCursor {
+  from {
+    border-right-color: #3f3f3f;
+  }
+  to {
+    border-right-color: transparent;
+  }
 }
 
-#actions {
-  width: 150px;
-}
-
-#btnLogout {
-  margin-top: 200px;
-  padding: 8px 30px;
-  border-radius: 50px;
-  border: none;
-  background-color: #22a07a;
-  color: white;
-  font-size: 15px;
-  font-family: Montserrat, sans-serif;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.iptTask {
-  border: none;
-  color: #353535;
-  font-family: Montserrat, sans-serif;
-  padding: 4px;
-}
-
-#username,
-#usernameCad {
-  margin-bottom: 15px;
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 15em;
+  }
 }

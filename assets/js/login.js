@@ -1,19 +1,41 @@
+const buttonLogin = document.getElementById("button-login");
+const arrow = document.getElementById("arrow");
 const formLogin = document.getElementById("form-login");
 const userPassword = document.getElementById("input-password");
 const userEmail = document.getElementById("input-email");
 const icon = document.querySelector("#i-eye");
-const msgError = document.getElementById("msg-error-login");
+const containerAlert = document.getElementById("container-alert");
 
-//Opção para deixar visível senha
-icon.addEventListener("click", () => {
-  if (userPassword.getAttribute("type") == "password") {
-    userPassword.setAttribute("type", "text");
-  } else {
-    userPassword.setAttribute("type", "password");
-  }
+buttonLogin.addEventListener("mouseover", () => {
+  arrow.style.animation = "arrow 0.7s infinite";
 });
 
-//Evento para autenticação do login
+buttonLogin.addEventListener("mouseleave", () => {
+  arrow.style.animation = "none";
+});
+
+if (icon) {
+  icon.addEventListener("click", () => {
+    if (userPassword.getAttribute("type") == "password") {
+      userPassword.setAttribute("type", "text");
+    } else {
+      userPassword.setAttribute("type", "password");
+    }
+  });
+}
+
+const myAlert = (message, type) => {
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = [
+    `<div class="alert-danger alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    "</div>",
+  ].join("");
+
+  containerAlert.append(wrapper);
+};
+
 formLogin.addEventListener("submit", doLogin);
 function doLogin(e) {
   e.preventDefault();
@@ -41,9 +63,10 @@ function doLogin(e) {
     localStorage.setItem("logged", userEmail.value);
     window.location.href = "./tasks.html";
   } else {
-    msgError.setAttribute("style", "display: block");
-    msgError.innerHTML =
-      "<p style='text-align:center;'>Usuário e/ou senha incorretos.</br>Você ainda não tem cadastro? Cadastre-se abaixo.</p>";
+    myAlert(
+      "Usuário e/ou senha incorretos. Você ainda não tem cadastro? Cadastre-se abaixo.",
+      "danger"
+    );
     userEmail.value = "";
     userPassword.value = "";
     userEmail.focus();

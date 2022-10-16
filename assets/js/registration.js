@@ -1,33 +1,19 @@
+const buttonLogin = document.getElementById("button-cad-login");
+const arrow = document.getElementById("arrow2");
 let userList = localStorage.getItem("users");
 let userListArray = JSON.parse(userList) || [];
-console.log(userListArray);
 const formCadastro = document.getElementById("form-cadastro");
 const inputEmail = document.getElementById("input-cad-email");
 const inputPassword = document.getElementById("input-cad-password");
 const inputConfirm = document.getElementById("input-confirm");
-let validPassword = false;
-let validConfirm = false;
 const icon1 = document.querySelector("#i-eye");
 const icon2 = document.querySelector("#i-eye2");
+const containerAlert = document.getElementById("container-alert");
 const msgError = document.getElementById("msg-error-regist");
+const bsAlert = new bootstrap.Alert("#myAlert");
+let validPassword = false;
+let validConfirm = false;
 
-//Opção para deixar visível senha
-icon1.addEventListener("click", () => {
-  if (inputPassword.getAttribute("type") == "password") {
-    inputPassword.setAttribute("type", "text");
-  } else {
-    inputPassword.setAttribute("type", "password");
-  }
-});
-icon2.addEventListener("click", () => {
-  if (inputConfirm.getAttribute("type") == "password") {
-    inputConfirm.setAttribute("type", "text");
-  } else {
-    inputConfirm.setAttribute("type", "password");
-  }
-});
-
-//Evento para cadastrar formulário de cadastro do usuário
 formCadastro.addEventListener("submit", submitFormUser);
 function submitFormUser(e) {
   e.preventDefault();
@@ -44,45 +30,75 @@ function submitFormUser(e) {
     userListArray.push(login);
     localStorage.setItem("users", JSON.stringify(userListArray));
 
-    // localStorage.setItem(login.email, JSON.stringify(userListArray));
-
     window.location.href = "./login.html";
   } else {
-    msgError.setAttribute("style", "display: block");
-    msgError.innerHTML = "<p>Preencha as senhas corretamente.</p>";
+    myAlert("Preencha as senhas corretamente.", "danger");
   }
 }
 
-// Validação da senha
-inputPassword.addEventListener("keyup", () => {
+buttonLogin.addEventListener("mouseover", () => {
+  arrow.style.animation = "rotate 4s ease-in-out infinite";
+});
+
+buttonLogin.addEventListener("mouseleave", () => {
+  arrow.style.animation = "none";
+});
+
+if (icon1) {
+  icon1.addEventListener("click", () => {
+    if (inputPassword.getAttribute("type") == "password") {
+      inputPassword.setAttribute("type", "text");
+    } else {
+      inputPassword.setAttribute("type", "password");
+    }
+  });
+}
+
+if (icon2) {
+  icon2.addEventListener("click", () => {
+    if (inputConfirm.getAttribute("type") == "password") {
+      inputConfirm.setAttribute("type", "text");
+    } else {
+      inputConfirm.setAttribute("type", "password");
+    }
+  });
+}
+
+const myAlert = (message, type) => {
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = [
+    `<div class="alert-danger alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    "</div>",
+  ].join("");
+
+  containerAlert.append(wrapper);
+};
+
+buttonLogin.addEventListener("click", () => {
   if (inputPassword.value.length <= 5) {
-    msgError.setAttribute("style", "display: block");
-    msgError.innerHTML = "<p>A senha precisa ter no mínimo 6 caracteres.</p>";
+    myAlert("A senha precisa ter no mínimo 6 caracteres.", "danger");
     validPassword = false;
   } else {
-    msgError.setAttribute("style", "display: none");
     validPassword = true;
   }
 });
 
-// Validação da confirmação da senha
-inputConfirm.addEventListener("keyup", () => {
+buttonLogin.addEventListener("click", () => {
   if (inputPassword.value != inputConfirm.value) {
-    msgError.setAttribute("style", "display: block");
-    msgError.innerHTML = "<p>As senhas não conferem.</p>";
+    myAlert("As senhas não conferem.", "danger");
     validConfirm = false;
   } else {
-    msgError.setAttribute("style", "display: none");
     validConfirm = true;
   }
 });
 
-// Validação se e-mail já existe;
 function isEmailValid(email) {
   if (userListArray.some((user) => email === user.email)) {
     msgError.setAttribute("style", "display: block");
     msgError.innerHTML =
-      "<p class='textLogin'>E-mail já cadastrado. </br><a href='./login.html'>Clique aqui e faça o login</a> ou cadastre novo e-mail</p>";
+      "<p>E-mail já cadastrado. </br><a href='./login.html'>Clique aqui e faça o login</a> ou cadastre novo e-mail</p>";
     inputEmail.focus();
     return false;
   }
