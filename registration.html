@@ -19,10 +19,8 @@
     ></script>
   </head>
 
-  <body>
-    <div
-      class="container-fluid vh-100 p-3 d-flex justify-content-center align-items-center"
-    >
+  <body class="d-flex flex-column justify-content-center align-items-center">
+    <div class="container-fluid p-5 d-flex justify-content-center">
       <div class="row backPage rounded-4">
         <div
           class="col-12 col-sm-5 img-login d-flex align-items-center justify-content-center"
@@ -41,8 +39,8 @@
           </h1>
           <form class="form mt-4" id="form-cadastro">
             <h1 class="title-login fs-3 mb-3 text-center">Cadastro</h1>
-            <div id="container-alert"></div>
-            <div id="msg-error-regist" class="rounded-3 mb-1 text-center"></div>
+            <div id="container-alert-account"></div>
+            <div id="msg-error-regist" class="rounded-3 text-center"></div>
             <div class="form-floating w-100 mb-3">
               <input
                 type="email"
@@ -53,7 +51,7 @@
                 value=""
                 required
               />
-              <label id="label-email" for="floatingInput"
+              <label id="label-email" for="input-cad-email"
                 >Digite seu e-mail</label
               >
             </div>
@@ -65,11 +63,11 @@
                 name="input-cad-password"
                 placeholder="Password"
                 value=""
-                required
               />
               <i class="fa-solid fa-eye" id="i-eye"></i>
+              <i class="fa-solid fa-eye-slash" id="i-eye3"></i>
 
-              <label id="label-password" for="floatingPassword"
+              <label id="label-password" for="input-cad-password"
                 >Digite sua senha</label
               >
             </div>
@@ -84,8 +82,9 @@
                 required
               />
               <i class="fa-solid fa-eye" id="i-eye2"></i>
+              <i class="fa-solid fa-eye-slash" id="i-eye4"></i>
 
-              <label id="label-password" for="floatingPassword"
+              <label id="label-password" for="input-confirm"
                 >Repita a senha</label
               >
             </div>

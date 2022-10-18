@@ -10,12 +10,13 @@
 body {
   font-family: Poppins, sans-serif !important;
   background: linear-gradient(
-    -135deg,
-    rgba(65, 196, 189, 1) 0%,
-    rgba(9, 2, 104, 1) 65%
-  );
+      -135deg,
+      rgba(65, 196, 189, 1) 0%,
+      rgba(9, 2, 104, 1) 65%
+    )
+    no-repeat;
   overflow: scroll;
-  height: 100%;
+  min-height: 100vh;
 }
 
 .login-img {
@@ -24,11 +25,7 @@ body {
 
 .backPage {
   background-color: #f5f5f5;
-  width: 90%;
-}
-
-.backHeight {
-  height: 100%;
+  width: 100%;
 }
 
 h1,
@@ -76,7 +73,6 @@ a:hover {
   color: #01a80a !important;
 }
 
-#arrow,
 #arrow2 {
   color: white;
   position: relative;
@@ -89,11 +85,15 @@ a:hover {
   bottom: 51px;
 }
 
-#i-eye,
-#i-eye2 {
+.fa-eye {
   position: absolute;
   bottom: 21px;
-  left: 90%;
+  left: 85%;
+}
+
+#i-eye3,
+#i-eye4 {
+  display: none;
 }
 
 #msg-error-regist {
@@ -124,10 +124,6 @@ a:hover {
   font-family: Poppins, sans-serif;
 }
 
-.div-task {
-  background-color: #fff;
-}
-
 #button-add-task {
   width: 150px;
   margin-top: 12px;
@@ -141,6 +137,14 @@ a:hover {
 .fa-regular {
   position: relative;
   right: 12px;
+}
+
+.alert-size {
+  font-size: 12px !important;
+}
+
+.font-size {
+  font-size: 14px !important;
 }
 
 @media screen and (max-width: 700px) {
@@ -160,17 +164,9 @@ a:hover {
   }
 }
 
-.alert-danger {
-  font-size: 12px;
-}
-
-.font-size {
-  font-size: 14px !important;
-}
-
 @media screen and (max-width: 940px) {
   .title {
-    font-size: 18px !important;
+    font-size: 17px !important;
   }
 }
 
@@ -186,19 +182,19 @@ a:hover {
 
 @keyframes arrow {
   0% {
-    left: 40px;
+    left: 2.5em;
   }
   100% {
-    left: 53px;
+    left: 3em;
   }
 }
 
 @keyframes arrow2 {
   0% {
-    left: 59px;
+    left: 3.5em;
   }
   100% {
-    left: 70px;
+    left: 4em;
   }
 }
 
@@ -217,5 +213,14 @@ a:hover {
   }
   to {
     width: 15em;
+  }
+}
+
+@keyframes moveButton {
+  from {
+    left: 0;
+  }
+  to {
+    left: 15em;
   }
 }

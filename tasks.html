@@ -22,8 +22,9 @@
     <nav class="navbar bg-light">
       <form class="container-fluid justify-content-end">
         <button
+          data-bs-toggle="modal"
+          data-bs-target="#modalLogout"
           id="btnLogout"
-          onclick="logout()"
           class="btn btn-sm btn-secondary"
           type="button"
         >
@@ -34,42 +35,46 @@
   </header>
   <body>
     <div
-      class="container-fluid backTotal backHeight p-3 d-flex justify-content-center align-items-center"
+      class="container-fluid backTotal p-4 d-flex justify-content-center align-items-center"
     >
-      <div class="row backPage p-4 rounded-4">
-        <h1 class="fs-3 text-center my-4">Minhas tarefas</h1>
-        <div class="accordion mb-3" id="accordion-list"></div>
-        <div id="msg-error-task"></div>
-        <div id="container-alert"></div>
-        <form id="form-tasks">
-          <div class="div-task p-2 rounded-3 border border-secondary">
-            <input
-              class="border-0 w-100"
-              id="input-title"
-              name="input-title"
-              type="text"
-              placeholder="Nome da tarefa"
-              value=""
-            />
-            <textarea
-              id="input-description"
-              class="border-0 w-100 pt-1"
-              cols="50"
-              rows="3"
-              placeholder="Descrição"
-              value=""
-            ></textarea>
-          </div>
+      <div class="row">
+        <div class="col-12 backPage p-4 rounded-4">
+          <h1 class="fs-3 text-center my-4">Minhas tarefas</h1>
 
-          <button
-            type="submit"
-            id="button-add-task"
-            class="ms-3"
-            value="Adicionar Tarefa"
-          >
-            <i id="icon-add" class="fa-regular fa-plus"></i>Adicionar Tarefa
-          </button>
-        </form>
+          <div class="mb-3" id="card-list"></div>
+          <div id="container-alert-task"></div>
+          <form id="form-tasks">
+            <div
+              class="div-task p-2 rounded-3 border border-secondary w-100 bg-white"
+            >
+              <input
+                class="border-0 w-100"
+                id="input-title"
+                name="input-title"
+                type="text"
+                placeholder="Nome da tarefa"
+                value=""
+              />
+              <textarea
+                id="input-description"
+                class="border-0 pt-1 w-100"
+                cols="50"
+                rows="3"
+                placeholder="Descrição"
+                value=""
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              id="button-add-task"
+              class="ms-3"
+              value="Adicionar Tarefa"
+            >
+              <i id="icon-add" class="fa-regular fa-plus"></i>Adicionar Tarefa
+            </button>
+          </form>
+        </div>
       </div>
     </div>
     <div
@@ -156,6 +161,44 @@
               data-bs-dismiss="modal"
             >
               Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="modalLogout"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Excluir tarefa
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Deseja sair?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btnConfirmLogout">
+              Sim
+            </button>
+            <button
+              type="button"
+              class="font-size btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Não
             </button>
           </div>
         </div>

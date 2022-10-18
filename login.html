@@ -19,10 +19,8 @@
     ></script>
   </head>
 
-  <body>
-    <div
-      class="container-fluid vh-100 p-3 d-flex justify-content-center align-items-center"
-    >
+  <body class="d-flex justify-content-center align-items-center">
+    <div class="container-fluid p-5 d-flex justify-content-center">
       <div class="row backPage rounded-4">
         <div
           class="col-12 col-sm-5 img-login d-flex align-items-center justify-content-center"
@@ -42,11 +40,9 @@
           <p class="text-center m-3 text">
             Ferramenta de gerenciamento de tarefas inteligente e simples.
           </p>
+          <h3 class="title-login text-center fs-3 m-3 mb-4">Iniciar Sessão</h3>
+          <div id="msg-error-regist" class="rounded-3 mb-4 text-center"></div>
           <form class="form" id="form-login">
-            <h3 class="title-login text-center fs-3 m-3 mb-4">
-              Iniciar Sessão
-            </h3>
-            <div id="container-alert"></div>
             <div class="form-floating w-100 mb-3">
               <input
                 type="email"
@@ -54,7 +50,6 @@
                 id="input-email"
                 placeholder="name@example.com"
                 value=""
-                required
               />
               <label id="label-email" for="floatingInput"
                 >Digite seu e-mail</label
@@ -67,9 +62,9 @@
                 id="input-password"
                 placeholder="Password"
                 value=""
-                required
               />
               <i class="fa-solid fa-eye" id="i-eye"></i>
+              <i class="fa-solid fa-eye-slash" id="i-eye3"></i>
 
               <label id="label-password" for="floatingPassword"
                 >Digite sua senha</label
@@ -78,11 +73,10 @@
             <div class="w-100 d-flex flex-column align-items-center">
               <input
                 type="submit"
-                class="button btn rounded-3 ps-4 pe-5 py-2 mt-4 w-50 border-0"
+                class="button btn rounded-3 px-1 py-2 my-3 w-25 border-0"
                 id="button-login"
                 value="LOGIN"
               />
-              <i id="arrow" class="fa-solid fa-arrow-right"></i>
               <a
                 class="text-decoration-none text-center mx-2 mb-2"
                 id="create-account"

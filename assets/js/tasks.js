@@ -1,19 +1,39 @@
 let loggedInUser = localStorage.getItem("logged");
+
+if (!loggedInUser) {
+  window.location.href = "./login.html";
+  alert("Faça seu login!");
+}
+
+function elementValidator(selector) {
+  if (selector) {
+    return selector;
+  }
+  console.log("Elemento não encontrado.");
+}
+
 let listTask = JSON.parse(localStorage.getItem(loggedInUser)) || [];
-let formTask = document.getElementById("form-tasks");
-const inputTitle = document.getElementById("input-title");
-const inputDescription = document.getElementById("input-description");
-const list = document.getElementById("tbody-task");
-const msgError = document.getElementById("msg-error-task");
-const iconAdd = document.getElementById("icon-add");
-const btnAdd = document.getElementById("button-add-task");
-const accordion = document.getElementById("accordion-list");
+let formTask = elementValidator(document.getElementById("form-tasks"));
+const inputTitle = elementValidator(document.getElementById("input-title"));
+const inputDescription = elementValidator(
+  document.getElementById("input-description")
+);
+const iconAdd = elementValidator(document.getElementById("icon-add"));
+const btnAdd = elementValidator(document.getElementById("button-add-task"));
+const accordion = elementValidator(document.getElementById("card-list"));
+const btnDelete = elementValidator(document.getElementById("btnDelete"));
+const btnEdit = elementValidator(document.getElementById("btnEdit"));
+const btnLogout = elementValidator(document.getElementById("btnConfirmLogout"));
+const editTitle = elementValidator(document.getElementById("recipient-name"));
+const editDescription = elementValidator(
+  document.getElementById("message-text")
+);
+const containerAlert = elementValidator(
+  document.getElementById("container-alert-task")
+);
 const modalDelete = new bootstrap.Modal("#modalDelete");
 const modalEdit = new bootstrap.Modal("#modalEdit");
-const btnDelete = document.getElementById("btnDelete");
-const btnEdit = document.getElementById("btnEdit");
-const editTitle = document.getElementById("recipient-name");
-const editDescription = document.getElementById("message-text");
+const modalLogout = new bootstrap.Modal("#modalLogout");
 
 btnAdd.addEventListener("mouseover", () => {
   iconAdd.style.animation = "rotate 1s ease-in-out";
@@ -29,18 +49,36 @@ function showTaskList() {
   accordion.innerHTML = generateTaskList(listTask);
 }
 
+const myAlert = (message, type) => {
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = [
+    `<div class="alert-size alert alert-${type} alert-dismissible" role="alert alert-close">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    "</div>",
+  ].join("");
+
+  containerAlert.append(wrapper);
+};
+
+function closeAlert() {
+  setTimeout(() => {
+    const alertClose = document.querySelectorAll(".alert-close");
+    alertClose.forEach((index) => {
+      index.style.display = "none";
+    });
+  }, 2000);
+}
+
 formTask.addEventListener("submit", addTask);
 function addTask(e) {
   e.preventDefault();
   if (inputTitle.value == "" || inputDescription.value == "") {
-    msgError.setAttribute("style", "display: block");
-    msgError.innerHTML =
-      "<p>Adicione o nome da tarefa e/ou a descrição da tarefa.</p>";
+    myAlert("Adicione o nome e/ou a descrição da tarefa.", "danger");
+    closeAlert();
   } else {
-    msgError.setAttribute("style", "display: none");
-
     const newTask = {
-      id: newId(listTask),
+      id: generateNewId(),
       title: inputTitle.value,
       description: inputDescription.value,
     };
@@ -55,39 +93,33 @@ function addTask(e) {
   }
 }
 
-function generateTaskList(newListTask) {
-  let addHtml = "";
-  newListTask.forEach((element) => {
-    let addAccordion = `<div class="accordion-item">
-    <h2 class="accordion-header" id="accordion-${element.id}">
-      <button
-        class="accordion-button collapsed font-size"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapse-accordion-${element.id}"
-        aria-expanded="false"
-        aria-controls="collapseTwo"
-      >
-      #${element.id}<span class="ms-3">${element.title}</span>
-      </button>
-    </h2>
-    <div
-      id="collapse-accordion-${element.id}"
-      class="accordion-collapse collapse"
-      aria-labelledby="accordion-${element.id}"
-      data-bs-parent="#accordionExample"
+function generateAccordion(element, index) {
+  return `<div class="card w-100 mb-1" id="accordion-list">
+    <div class="card-body" id="${element.id}">
+      <h5 class="card-title font-size">#${index + 1}<span class="ms-3">${
+    element.title
+  }</span></h5>
+      <p class="card-text alert-size mb-2 text-secondary">${element.description}
+      </p>
+    <button
+      class="me-1 btn alert-size btn-secondary"
+      onclick="showModalEdit(${element.id})"
     >
-      <div class="accordion-body d-flex">
-        <div class="flex-grow-1 font-size me-2">${element.description}</div> 
-        <button class ='me-2 btn font-size btn-primary' onclick='showModalEdit(${element.id})'>Editar</button>
-        <button class="btn btn-danger font-size"
-        onclick = 'showModalDelete(${element.id})'
-        >Excluir</button>
-      </div>
+      Editar
+    </button>
+    <button
+      class="btn btn-danger alert-size"
+      onclick="showModalDelete(${element.id})">
+      Excluir
+    </button>
     </div>
   </div>`;
+}
 
-    addHtml += addAccordion;
+function generateTaskList(newListTask) {
+  let addHtml = "";
+  newListTask.forEach((element, index) => {
+    addHtml += generateAccordion(element, index);
   });
   return addHtml;
 }
@@ -138,23 +170,11 @@ function editTask(id) {
   modalEdit.hide();
 }
 
-function newId(taskList) {
-  let nextId = taskList.length + 1;
-
-  let index = taskList.findIndex((value) => value.id === nextId);
-
-  while (index >= 0) {
-    nextId++;
-    index = taskList.findIndex((value) => value.id === nextId);
-  }
-  return nextId;
+function generateNewId() {
+  return Date.now();
 }
 
-function logout() {
-  const confirmed = confirm("Deseja sair?");
-  if (confirmed) {
-    window.location.href = "./login.html";
-  } else {
-    window.location.href = "./tasks.html";
-  }
-}
+btnLogout.addEventListener("click", () => {
+  localStorage.setItem("logged", "");
+  window.location.href = "./login.html";
+});
